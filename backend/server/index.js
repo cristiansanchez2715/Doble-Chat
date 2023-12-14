@@ -24,6 +24,7 @@ app.use(cors(corsOptions));
 
 const mysql = require('mysql')
 
+
 // const io = require('socket.io')(server);
 
 app.use(express.json());
@@ -85,12 +86,17 @@ server.listen(port, () => {
 
 // enviando mensajes a la base de datos
 
+const DB_HOST =  process.env.DB_HOST || "localhost"
+const DB_USER = process.env.DB_USER ||  "u827864012_root"
+const DB_PASSWORD = process.env.DB_PASSWORD || "spizamarillo2715"
+const DB_NAME = process.env.DB_NAME || "u827864012_ChatEnVivo"
+const DB_PORT = process.env.DB_PORT || '3306'
 const db = mysql.createConnection({
-    host: 'server891',
-    user: "u827864012_root",
-    password: "spizamarillo2715",
-    database: "u827864012_ChatEnVivo",
-    port: 3306,
+    host: DB_HOST,
+    user: DB_USER,
+    password: DB_PASSWORD,
+    database: DB_NAME,
+    port: DB_PORT,
 })
 
 db.connect(err => {

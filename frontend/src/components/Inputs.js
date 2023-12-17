@@ -11,8 +11,9 @@ const [errorSocket, setErrorSocket] = useState(null)
 const socketRef = useRef()
 let socket;
 
-socketRef.current = io('https://diningexperiencesource.shop', { path: '/socket' });
-  
+// socketRef.current = io('https://vercel-test-ncy3i41ui-cristian-medinas-projects.vercel.app', { path: '/socket' });
+  socketRef.current = io('http://localhost:4000', { path: '/socket' });
+ 
 
   const scrollToBottom = () => {
     if (chatContainerRef.current) {

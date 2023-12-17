@@ -5,14 +5,17 @@ import { useState } from 'react'
 function Login({setUsersConected, numberUsersConected, setNumberUsersConected, nombreUsuario, setNombreUsuario, setVisibilityHome, setVisibilityLogin}) {
 const [error, setError] = useState(null)
 let [actualizedApp, setActualizedApp] = useState(0)
+// 
+        // const response = await fetch("https://vercel-test-ncy3i41ui-cristian-medinas-projects.vercel.app/userContainer", {
 
 const usersConectedAddFunction = async () => {
     try {
-      const response = await fetch("https://diningexperiencesource.shop/userContainer", {
+      const response = await fetch("http://localhost:4000/userContainer", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        mode: 'cors', 
       });
       if (!response.ok) {
         throw new Error(`Failed to connect. Status: ${response.status}`);

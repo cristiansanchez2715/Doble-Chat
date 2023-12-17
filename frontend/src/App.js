@@ -22,12 +22,18 @@ const [receiveMessage, setReceiveMessage] = useState([])
 const socketRef = useRef();
 // Logica coneccion backend
 
-const apiSendMessage = "https://diningexperiencesource.shop/sendMessage"
+
+const apiSendMessage = "http://localhost:4000/sendMessage"
+
+
+// const apiSendMessage = "https://vercel-test-ncy3i41ui-cristian-medinas-projects.vercel.app/sendMessage"
 
 
 // traer mensajes desde el chat websocket.io
 useEffect(() => {
-  socketRef.current = io('https://diningexperiencesource.shop', { path: '/socket' });
+  // socketRef.current = io('https://vercel-test-ncy3i41ui-cristian-medinas-projects.vercel.app', { path: '/socket' });
+// 
+  socketRef.current = io('http://localhost:4000', { path: '/socket' });
 
   // e.preventDefault()
   // Conectarse al servidor Socket.IO

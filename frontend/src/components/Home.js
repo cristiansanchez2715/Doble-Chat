@@ -5,7 +5,9 @@ import { useEffect, useState, useRef } from 'react'
 function Home({receiveMessage, setReceiveMessage, chatContainerRef, setUsersConected, usersConected, setVisibilityLogin, setVisibilityHome, setNumberUsersConected, numberUsersConected, sendMessage, messgesAlreadyExist, nombreUsuario, setReloadMessage, reloadMessage}) {
   const [dataApi, setDataApi] = useState([])
   const [visibilityUsersConected, setVisibilityUsersConected] = useState(true)
-const breakPointMessage = "https://diningexperiencesource.shop"
+const breakPointMessage = "http://localhost:4000"
+
+// const breakPointMessage = "https://vercel-test-ncy3i41ui-cristian-medinas-projects.vercel.app"
    const [activarChat, setActivarChat] = useState(false)
   const [challangeComponent, setChallangeComponent] = useState(false)
   const [actualization, setActualization] = useState(0) 
@@ -39,7 +41,9 @@ const desabilityVisibilityUsersConected = () => {
 
 const addUserConected = () => {
   // e.preventDefault()
-  fetch("https://diningexperiencesource.shop/userContainer")
+  
+  // fetch("https://vercel-test-ncy3i41ui-cristian-medinas-projects.vercel.app/userContainer")
+  fetch("http://localhost:4000/userContainer")
   .then(res => res.json())
   .then(data => setUsersConected(prev => [...prev, ...data.usersConnected]))
   

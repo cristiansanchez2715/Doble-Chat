@@ -3,20 +3,33 @@ const express = require("express")
 const app = express()
 const http = require('http')
 const server = http.createServer(app);
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://localhost:3000');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  next();
+});
+
+
 const io = require('socket.io')(server, {
   path: '/socket',
   cors: {
-    origin: 'https://diningexperiencesource.shop',
+    origin: 'http://localhost:3000',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
+    optionsSuccessStatus: 204,
   },
 });
 
 const cors = require('cors')
 const corsOptions = {
-  origin: 'https://diningexperiencesource.shop', // Reemplaza con la URL de tu aplicación frontend
+  // origin: 'https://diningexperiencesource.shop', // Reemplaza con la URL de tu aplicación frontend
+    origin: '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,
+  allowedHeaders: 'Content-Type,Authorization',
 };
 
 app.use(cors(corsOptions));
@@ -31,7 +44,7 @@ app.use(express.json());
 
 
 const port =  process.env.PORT || 4000;
-
+//  process.env.PORT ||
 const messages = [{username: "cristian", message: "no joda"}]
     
 // chat websocket
@@ -48,6 +61,12 @@ io.on('connection', (socket) => {
     io.emit('mensajeDesdeServidor', data);
   });
 });
+
+
+
+
+
+
 
 // manejo de errores
 
@@ -85,18 +104,20 @@ server.listen(port, () => {
 // Creando conexion a la base de datos
 
 // enviando mensajes a la base de datos
-
-const DB_HOST =  process.env.DB_HOST || "localhost"
-const DB_USER = process.env.DB_USER ||  "u827864012_root"
-const DB_PASSWORD = process.env.DB_PASSWORD || "spizamarillo2715"
-const DB_NAME = process.env.DB_NAME || "u827864012_ChatEnVivo"
-const DB_PORT = process.env.DB_PORT || '3306'
+// localhost
+// const DB_HOST =  process.env.DB_HOST || 
+// // "u827864012_root"
+// const DB_USER = process.env.DB_USER ||  "
+// const DB_PASSWORD = process.env.DB_PASSWORD || "spizamarillo2715"
+// // "u827864012_ChatEnVivo"
+// const DB_NAME = process.env.DB_NAME || "ChatEnVivo"
+// const DB_PORT = process.env.DB_PORT || '3306'
 const db = mysql.createConnection({
-    host: DB_HOST,
-    user: DB_USER,
-    password: DB_PASSWORD,
-    database: DB_NAME,
-    port: DB_PORT,
+    host: "127.0.0.1",
+    user: "root",
+    password: "spizamarillo2715",
+    database: "ChatEnVivo",
+    port: "3306",
 })
 
 db.connect(err => {
